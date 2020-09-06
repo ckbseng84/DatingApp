@@ -17,12 +17,12 @@
       <a class="nav-link" (click)="logout()">logout</a>
     </li>
   </ul>
-  <div *ngIf="loggedIn()" class="dropdown">
-    <a class="dropdown-toggle text-light">
-      welcome user
+  <div *ngIf="loggedIn()" class="dropdown" dropdown >
+    <a class="dropdown-toggle text-light" dropdownToggle >
+      welcome {{authService.decodedToken?.unique_name | titlecase}}
     </a>
 
-    <div class="dropdown-menu">
+    <div class="dropdown-menu" *dropdownMenu >
       <a class="dropdown-item" href="#"><i class="fa fa-user"></i> edit profile</a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" href="#"><i class="fa fa-sign-out"></i>  logout</a>
