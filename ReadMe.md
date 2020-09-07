@@ -1,5 +1,5 @@
 # Dating App
-udemy [https://www.udemy.com/course/build-an-app-with-aspnet-core-and-angular-from-scratch/] - Neil Cummings
+udemy [Build an app with ASPNET Core and Angular from scratch](https://www.udemy.com/course/build-an-app-with-aspnet-core-and-angular-from-scratch/) - Neil Cummings
 
 ## Installation
   clone from repo
