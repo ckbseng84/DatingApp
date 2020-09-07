@@ -16,6 +16,8 @@ udemy [Build an app with ASPNET Core and Angular from scratch](https://www.udemy
      > `npm install --save-dev @angular/cli@latest`
   1. Angular jwt [https://github.com/auth0/angular2-jwt]
      > npm install @auth0/angular-jwt
+  1. bootswatch - themes
+      > npm install bootswatch
   1. third party components
      1. alertify
      1. ngx boostrap
@@ -45,6 +47,10 @@ udemy [Build an app with ASPNET Core and Angular from scratch](https://www.udemy
     1. NugGet Package Manager(optional)
     1. Prettier - Code formatter(optional)
     1. TSLint
+
+## UI Design references
+  1. [Bootstrap 4](https://getbootstrap.com/)
+  1. [Bootswatch](https://bootswatch.com/)
 
 
 
