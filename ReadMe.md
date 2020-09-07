@@ -17,8 +17,9 @@ udemy [https://www.udemy.com/course/build-an-app-with-aspnet-core-and-angular-fr
   1. Angular jwt [https://github.com/auth0/angular2-jwt]
      > npm install @auth0/angular-jwt
   1. third party components
-    1. alertify
-    1. ngx boostrap
+     1. alertify
+     1. ngx boostrap
+     
 ## build database
 ### SQLite
     1. cd to datingapp.api
