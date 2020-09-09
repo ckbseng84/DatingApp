@@ -9,5 +9,8 @@ namespace DatingApp.API.Models
         public string Description { get; set; }
         public DateTime MyProperty { get; set; }
         public bool IsMain { get; set; }
+        public virtual User User { get; set; } // require to declare virtual
+        public int UserId { get; set; }
+
     }
 }
