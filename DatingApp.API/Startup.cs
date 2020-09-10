@@ -19,6 +19,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using DatingApp.API.Helpers;
+using AutoMapper;
+
 namespace DatingApp.API
 {
     public class Startup
@@ -42,6 +44,7 @@ namespace DatingApp.API
             services.AddCors();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IDatingRepository, DatingRepository>();
+            services.AddAutoMapper(typeof(DatingRepository).Assembly); // google automapper for multiple instance
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options => {
                 options.TokenValidationParameters= new TokenValidationParameters

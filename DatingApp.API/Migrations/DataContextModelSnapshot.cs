@@ -22,14 +22,14 @@ namespace DatingApp.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsMain")
                         .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("MyProperty")
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("Url")
                         .HasColumnType("TEXT");
