@@ -45,7 +45,7 @@ export function tokenGetter() {
     BsDropdownModule.forRoot(),
     BrowserAnimationsModule, // additional, to fix with DbDropdownModule
     RouterModule.forRoot(appRoutes),
-    TabsModule,
+    TabsModule.forRoot(),
     JwtModule.forRoot({
       config: {
          tokenGetter,
