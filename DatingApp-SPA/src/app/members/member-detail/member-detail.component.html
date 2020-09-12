@@ -29,6 +29,27 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-8"></div>
+    <div class="col-sm-8">
+      <div class="tab-panel">
+        <tabset class="member-tabset">
+          <tab heading="about {{user?.knownAs}}">
+            <h4>description</h4>
+            <p>{{user?.introduction}}</p>
+            <h4>Looking For</h4>
+            <p>{{user?.lookingFor}}</p>
+          </tab>
+          <tab heading="interests">
+            <h4>Interests</h4>
+            <p>{{user?.interest}}</p>
+          </tab>
+          <tab heading="photos">
+            <p>photo here</p>
+          </tab>
+          <tab heading="message">
+            <p>message here</p>
+          </tab>
+        </tabset>
+      </div>
+    </div>
   </div>
 </div>
