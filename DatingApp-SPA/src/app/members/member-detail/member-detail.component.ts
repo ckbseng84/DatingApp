@@ -12,20 +12,22 @@ import { UserService } from 'src/app/_services/user.service';
 export class MemberDetailComponent implements OnInit {
   user: User;
   constructor(private userService: UserService,
-    private alertify: AlertifyService,
-    private route: ActivatedRoute
+              private alertify: AlertifyService,
+              private route: ActivatedRoute
     ) { }
 
   ngOnInit() {
-    this.loaduser();
+    this.route.data.subscribe(data =>
+      this.user = data['user']
+      );
   }
-  loaduser(){
-    this.userService.getUser(+this.route.snapshot.params['id'])
-      .subscribe((user: User) => {
-        this.user = user;
-      }, error => {
-        this.alertify.error(error);
-      });
-  }
+  // loaduser(){
+  //   this.userService.getUser(+this.route.snapshot.params['id'])
+  //     .subscribe((user: User) => {
+  //       this.user = user;
+  //     }, error => {
+  //       this.alertify.error(error);
+  //     });
+  // }
 
 }
