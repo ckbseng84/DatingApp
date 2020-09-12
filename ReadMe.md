@@ -18,6 +18,8 @@ udemy [Build an app with ASPNET Core and Angular from scratch](https://www.udemy
      > npm install @auth0/angular-jwt
   1. bootswatch - themes
       > npm install bootswatch
+  1. ngx gallery
+      > npm i @kolkov/ngx-gallery
   1. third party components
      1. alertify
      1. ngx boostrap
