@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, ActivationEnd } from '@angular/router';
 import { User } from 'src/app/_models/user';
@@ -10,8 +10,17 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
   styleUrls: ['./member-edit.component.scss']
 })
 export class MemberEditComponent implements OnInit {
-  @ViewChild('editForm') editForm: NgForm;
   user: User;
+  @ViewChild('editForm') editForm: NgForm;
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any){
+    if (this.editForm.dirty){
+      // a prompt confirmation will show,
+      // but it is origin prompt out by web browser
+      $event.returnValue = true;
+    }
+  }
+
   constructor(private route: ActivatedRoute,
               private alertify: AlertifyService) { }
 
