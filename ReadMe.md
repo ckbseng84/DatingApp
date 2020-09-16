@@ -70,6 +70,7 @@ udemy [Build an app with ASPNET Core and Angular from scratch](https://www.udemy
      > what is the route.ts use for?
      > any other additional features?
 ### Web Api(Asp.net core)
+  1. ClaimTypes
 
 
 
