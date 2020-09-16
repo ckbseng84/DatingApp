@@ -54,5 +54,22 @@ udemy [Build an app with ASPNET Core and Angular from scratch](https://www.udemy
   1. [Bootstrap 4](https://getbootstrap.com/)
   1. [Bootswatch](https://bootswatch.com/)
 
+## To be Study
+### Angular
+  1. ActivatedRoute, ActivationEnd
+  1. @ViewChild
+  1. Resolve
+  1. http, .pipe, .map
+  1. HttpInterceptor :star::star:
+  1. service
+  1. Router
+  1. JwtHelperService
+  1. app.module.ts
+     > what is declaration, imports and providers?
+  1. route.ts
+     > what is the route.ts use for?
+     > any other additional features?
+### Web Api(Asp.net core)
+
 
 
