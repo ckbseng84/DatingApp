@@ -53,7 +53,10 @@ udemy [Build an app with ASPNET Core and Angular from scratch](https://www.udemy
 ## UI Design references
   1. [Bootstrap 4](https://getbootstrap.com/)
   1. [Bootswatch](https://bootswatch.com/)
-
+  1. [Font Awesome](https://fontawesome.com/v4.7.0/icons/)
+## To be changed
+  1. male and female icon by gender
+  1. member list group by gender
 ## To be Study
 ### Angular
   1. ActivatedRoute, ActivationEnd
@@ -69,6 +72,11 @@ udemy [Build an app with ASPNET Core and Angular from scratch](https://www.udemy
   1. route.ts
      > what is the route.ts use for?
      > any other additional features?
+  1. exception handling while database disconnected
+  1. .subscribe
+     > further study for more understanding
+### Bootstrap
+
 ### Web Api(Asp.net core)
   1. ClaimTypes
 
