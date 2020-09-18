@@ -50,6 +50,9 @@ udemy [Build an app with ASPNET Core and Angular from scratch](https://www.udemy
     1. Prettier - Code formatter(optional)
     1. TSLint
 
+## Third Party tools
+  1. [Cloudinary](https://cloudinary.com/) - cloud photos books
+
 ## UI Design references
   1. [Bootstrap 4](https://getbootstrap.com/)
   1. [Bootswatch](https://bootswatch.com/)
