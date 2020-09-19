@@ -14,12 +14,14 @@ udemy [Build an app with ASPNET Core and Angular from scratch](https://www.udemy
   1. Angular Cli
      > `npm install -g @angular/cli`
      > `npm install --save-dev @angular/cli@latest`
-  1. Angular jwt [https://github.com/auth0/angular2-jwt]
+  1. [Angular jwt](https://github.com/auth0/angular2-jwt)
      > npm install @auth0/angular-jwt
   1. bootswatch - themes
       > npm install bootswatch
   1. ngx gallery
       > npm i @kolkov/ngx-gallery
+  1. [ng2-file-upload](https://valor-software.com/ng2-file-upload/)
+      > npm install ng2-file-upload --save
   1. third party components
      1. alertify
      1. ngx boostrap
