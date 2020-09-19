@@ -16,6 +16,7 @@ namespace DatingApp.API.Controllers
 {
     [Authorize]
     [Route("api/users/{userId}/photos")]
+    [ApiController]
     public class PhotoController : ControllerBase
     {
         private readonly IDatingRepository _repo;
@@ -25,12 +26,12 @@ namespace DatingApp.API.Controllers
 
         public PhotoController(IDatingRepository repo,
             IMapper mapper,
-            IOptions<CloudinarySettings> cloudinarySetting)
+            IOptions<CloudinarySettings> cloudinarySetting) //inject specifically by group
         {
             _cloudinarySetting = cloudinarySetting;
             _repo = repo;
             _mapper = mapper;
-
+            // cloudinary account initialization
             Account acc = new Account(
                 _cloudinarySetting.Value.CloudName, 
                 _cloudinarySetting.Value.ApiKey,
@@ -48,25 +49,32 @@ namespace DatingApp.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPhotoForUser( int userId, 
-                            PhotoForCreationDto photoForCreationDto){
+        public async Task<IActionResult> AddPhotoForUser(int userId, 
+                            [FromForm]PhotoForCreationDto photoForCreationDto){
+            // verify useer id against with claim 
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)){
                 return Unauthorized();
             }
             var userFromRepo = await _repo.GetUser(userId);
-            var file = photoForCreationDto.File;
-            var uploadResult = new ImageUploadResult();
+             // form-data for files            
+             var file = photoForCreationDto.File;
 
+             // cloudinary object
+            var uploadResult = new ImageUploadResult(); 
+
+            // verify file before upload
             if(file.Length>0){
                 using( var stream = file.OpenReadStream()){
                     var uploadParams = new ImageUploadParams(){
                         File= new FileDescription(file.Name, stream), 
+                        // cloudinary transformation
                         Transformation = new Transformation().Width(500).Height(500).Crop("fill").Gravity("face")
                     };
-                    
+                    // call to upload
                     uploadResult = _cloudinary.Upload(uploadParams);
                 }
             }
+            // bind url and publicid response from cloudinary
             photoForCreationDto.Url = uploadResult.Url.ToString();
             photoForCreationDto.PublicId = uploadResult.PublicId;
 
@@ -79,7 +87,7 @@ namespace DatingApp.API.Controllers
             
             if(await _repo.SaveAll()){
                 var photoForReturn = _mapper.Map<PhotoForReturnDto>(photo);
-                
+                // not sure what this line use for
                 return CreatedAtRoute("GetPhoto",new{ Id = photo.Id, userId = userId},
                     photoForReturn);
             }

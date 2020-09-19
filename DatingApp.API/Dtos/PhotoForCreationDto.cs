@@ -5,7 +5,7 @@ namespace DatingApp.API.Dtos
 {
     public class PhotoForCreationDto
     {
-        PhotoForCreationDto()
+        public PhotoForCreationDto()
         {
             DateAdded=DateTime.Now;
         }
