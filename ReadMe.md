@@ -78,6 +78,7 @@ udemy [Build an app with ASPNET Core and Angular from scratch](https://www.udemy
   1. exception handling while database disconnected
   1. .subscribe
      > further study for more understanding
+  1. what is '!important'
 ### Bootstrap
 
 ### Web Api(Asp.net core)
