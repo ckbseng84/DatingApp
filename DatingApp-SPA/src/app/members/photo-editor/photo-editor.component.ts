@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Photo } from 'src/app/_models/photo';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
@@ -15,6 +15,7 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 })
 export class PhotoEditorComponent implements OnInit {
   @Input() photos: Photo[];
+  @Output() getMemberPhotoChange = new EventEmitter<string>(); // output main photo url
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
   response: string;
@@ -76,6 +77,7 @@ constructor(private authService: AuthService,
       this.currentMainPhoto.isMain = false;
       photo.isMain = true;
       this.alertify.success('Update successfully!');
+      this.getMemberPhotoChange.emit(photo.url);
     }, error => {
       this.alertify.error(error);
       console.log(error);
