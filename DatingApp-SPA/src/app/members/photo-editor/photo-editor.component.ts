@@ -71,13 +71,16 @@ constructor(private authService: AuthService,
   public fileOverBase(e: any): void {
     this.hasBaseDropZoneOver = e;
   }
+
   setMainPhoto(photo: Photo){
     this.userService.setMainPhoto(this.authService.decodedToken.nameid, photo.id).subscribe( next => {
       this.currentMainPhoto = this.photos.filter(p => p.isMain)[0];
       this.currentMainPhoto.isMain = false;
       photo.isMain = true;
       this.alertify.success('Update successfully!');
-      this.getMemberPhotoChange.emit(photo.url);
+      this.authService.changeMemberPhoto(photo.url);
+      this.authService.currentUser.photoUrl = photo.url;
+      localStorage.setItem('user', JSON.stringify(this.authService.currentUser));
     }, error => {
       this.alertify.error(error);
       console.log(error);
