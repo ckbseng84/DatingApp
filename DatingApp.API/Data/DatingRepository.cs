@@ -26,6 +26,7 @@ namespace DatingApp.API.Data
 
         public async Task<Photo> GetMainPhoto(int userId)
         {
+            //tested, all are return same sql script, so no different how to declare these ways
             //return await _context.Photos.Where(p => p.UserId == userId).FirstOrDefaultAsync(p => p.IsMain);
             //return await _context.Photos.FirstOrDefaultAsync(p => p.UserId == userId && p.IsMain);
             return await _context.Photos.Where(p => p.UserId == userId && p.IsMain).FirstOrDefaultAsync();
