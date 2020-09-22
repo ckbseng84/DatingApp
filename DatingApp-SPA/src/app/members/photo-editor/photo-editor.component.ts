@@ -11,7 +11,7 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 @Component({
   selector: 'app-photo-editor',
   templateUrl: './photo-editor.component.html',
-  styleUrls: ['./photo-editor.component.css']
+  styleUrls: ['./photo-editor.component.css'],
 })
 export class PhotoEditorComponent implements OnInit {
   @Input() photos: Photo[];
@@ -21,9 +21,9 @@ export class PhotoEditorComponent implements OnInit {
   response: string;
   baseUrl = environment.apiUrl; // todo what is environment.apiUrl at here
   currentMainPhoto: Photo;
-constructor(private authService: AuthService,
-            private userService: UserService,
-            private alertify: AlertifyService){
+  constructor(private authService: AuthService,
+              private userService: UserService,
+              private alertify: AlertifyService){
     this.uploader = new FileUploader({
       url: this.baseUrl + 'users/' + this.authService.decodedToken.nameid + '/photos',
       authToken: 'bearer ' + localStorage.getItem('token'),
@@ -43,13 +43,13 @@ constructor(private authService: AuthService,
       //       date: new Date()
       //     });
       //   });
-     // }
+      // }
     });
 
     this.hasBaseDropZoneOver = false;
 
     this.response = '';
-    this.uploader.onAfterAddingFile = (file) => {file.withCredentials = false; };
+    this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
     this.uploader.onSuccessItem = (item, response, status, header) => {
       if (response){
         const res: Photo = JSON.parse(response);
@@ -63,7 +63,7 @@ constructor(private authService: AuthService,
         this.photos.push(photo);
       }
     };
-    this.uploader.response.subscribe( res => this.response = res );
+    this.uploader.response.subscribe((res) => (this.response = res));
   }
 
   ngOnInit() {
@@ -73,18 +73,34 @@ constructor(private authService: AuthService,
   }
 
   setMainPhoto(photo: Photo){
-    this.userService.setMainPhoto(this.authService.decodedToken.nameid, photo.id).subscribe( next => {
-      this.currentMainPhoto = this.photos.filter(p => p.isMain)[0];
-      this.currentMainPhoto.isMain = false;
-      photo.isMain = true;
-      this.alertify.success('Update successfully!');
-      this.authService.changeMemberPhoto(photo.url);
-      this.authService.currentUser.photoUrl = photo.url;
-      localStorage.setItem('user', JSON.stringify(this.authService.currentUser));
-    }, error => {
-      this.alertify.error(error);
-      console.log(error);
+    this.userService.setMainPhoto(this.authService.decodedToken.nameid, photo.id).subscribe( (next) => {
+          this.currentMainPhoto = this.photos.filter((p) => p.isMain)[0];
+          this.currentMainPhoto.isMain = false;
+          photo.isMain = true;
+          this.alertify.success('Update successfully!');
+          this.authService.changeMemberPhoto(photo.url);
+          this.authService.currentUser.photoUrl = photo.url;
+          localStorage.setItem('user', JSON.stringify(this.authService.currentUser));
+        }, (error) => {
+          this.alertify.error(error);
+          console.log(error);
+        }
+      );
+  }
+  deletePhoto(id: number) {
+    this.alertify.confirm('confirm to delete?', () => {
+      this.userService
+      .deletePhoto(this.authService.decodedToken.nameid, id)
+      .subscribe(
+        (next) => {
+          this.photos.splice(this.photos.findIndex(p => p.id === id),1);
+          this.alertify.success('Photo deleted!');
+        },
+        (error) => {
+          this.alertify.error(error);
+          console.log(error);
+        }
+      );
     });
-
   }
 }
