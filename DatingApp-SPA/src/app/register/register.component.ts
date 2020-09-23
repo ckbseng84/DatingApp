@@ -23,9 +23,8 @@ export class RegisterComponent implements OnInit {
       username: new FormControl('sample', Validators.required),
       password: new FormControl('',
         [Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
-      confirmPassword: new FormControl('',Validators.required),
-
-    });
+      confirmPassword: new FormControl('', Validators.required),
+    }, this.passwordMatchValidator);
   }
 
   register(){
@@ -36,12 +35,14 @@ export class RegisterComponent implements OnInit {
     //   // this.alertify.error(error);
     //   console.log(error);
     // });
-    console.log(this.registerForm.value)
+    console.log(this.registerForm.value);
   }
 
   cancel(){
     this.cancelRegister.emit(false); // can be any object
   }
-
+  passwordMatchValidator(g: FormGroup){
+    return g.get('password').value === g.get('confirmPassword').value ? null : {'mismatch': true}; // todo not sure what mismatch does
+  }
 
 }
