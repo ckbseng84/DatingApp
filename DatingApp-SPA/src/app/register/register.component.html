@@ -9,7 +9,14 @@
     class="form-control" 
     formControlName="username" 
     placeholder="Username">
-    <div class="invalid-feedback ml-3">please enter user name</div>
+    <div class="invalid-feedback ml-3"
+      *ngIf="registerForm.get('username').hasError('required') 
+            && registerForm.get('username').touched"
+    >please enter username</div>
+    <div class="invalid-feedback ml-3"
+      *ngIf="registerForm.get('username').hasError('pattern') 
+            && registerForm.get('username').touched"
+    >a-z0-9</div>
   </div>
 
   <div class="form-group">
@@ -31,6 +38,10 @@
       *ngIf="registerForm.get('password').hasError('maxlength') 
             && registerForm.get('password').touched"
     >cannot exceed 8 characters</div>
+    <div class="invalid-feedback ml-3"
+      *ngIf="registerForm.get('password').hasError('pattern') 
+            && registerForm.get('password').touched"
+    >strong password</div>
   </div>
 
   <div class="form-group">

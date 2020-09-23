@@ -20,9 +20,15 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = new FormGroup({
-      username: new FormControl('', Validators.required),
-      password: new FormControl('',
-        [Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
+      username: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[A-Za-z][A-Za-z0-9]*$'),
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(8),
+      ]),
       confirmPassword: new FormControl('', Validators.required)
     }, this.passwordMatchValidator);
   }
@@ -42,7 +48,7 @@ export class RegisterComponent implements OnInit {
     this.cancelRegister.emit(false); // can be any object
   }
   passwordMatchValidator(g: FormGroup){
-    return g.get('password').value === g.get('confirmPassword').value ? null : {'mismatch': true}; // todo not sure what mismatch does
+    return g.get('password').value === g.get('confirmPassword').value ? null : {mismatch: true}; // todo not sure what mismatch does
   }
 
 }
