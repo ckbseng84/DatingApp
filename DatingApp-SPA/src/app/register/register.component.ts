@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { error } from '@angular/compiler/src/util';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -16,23 +16,29 @@ export class RegisterComponent implements OnInit {
 
   model: any = {};
 
-  constructor(private authService: AuthService, private alertify: AlertifyService) { }
+  constructor(private authService: AuthService,
+              private alertify: AlertifyService,
+              private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.registerForm = new FormGroup({
-      username: new FormControl('', [
+    this.createRegisterForm();
+  }
+  createRegisterForm(){
+    this.registerForm = this.fb.group({
+      username: ['', [
         Validators.required,
         Validators.pattern('^[A-Za-z][A-Za-z0-9]*$'),
-      ]),
-      password: new FormControl('', [
+      ]],
+      password: ['', [
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(8),
-      ]),
-      confirmPassword: new FormControl('', Validators.required)
-    }, this.passwordMatchValidator);
+      ]],
+      confirmPassword: ['', Validators.required],
+    }, {
+      validators: this.passwordMatchValidator
+    });
   }
-
   register(){
 
     // this.authService.register(this.model).subscribe(() => {
