@@ -30,7 +30,7 @@ namespace DatingApp.API.Controllers
             var mappedUsers = _mapper.Map<IEnumerable<UserForListDto>>(users);
             return Ok(mappedUsers);
         }
-        [HttpGet("{id}")]
+        [HttpGet("{id}",Name = "GetUser")]
         public async Task<IActionResult> GetUser(int Id){
             var user = await _repo.GetUser(Id);
             var mappedUser = _mapper.Map<UserForDetailDto>(user);
