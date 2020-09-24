@@ -3,6 +3,7 @@ import { error } from '@angular/compiler/src/util';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-register',
@@ -13,14 +14,17 @@ export class RegisterComponent implements OnInit {
   @Input() valueFromHome: any;
   @Output() cancelRegister = new EventEmitter();
   registerForm: FormGroup;
-
   model: any = {};
-
+  bsconfig: Partial<BsDatepickerConfig>;
   constructor(private authService: AuthService,
               private alertify: AlertifyService,
               private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.bsconfig = {
+      containerClass: 'theme-red',
+      showWeekNumbers: false,
+    };
     this.createRegisterForm();
   }
   createRegisterForm(){
@@ -37,7 +41,7 @@ export class RegisterComponent implements OnInit {
       confirmPassword: ['', Validators.required],
       gender: ['male'],
       knownAs: ['', Validators.required],
-      dateOfBirth:[null, Validators.required],
+      dateOfBirth: [null, Validators.required],
       city: ['', Validators.required],
       country: ['', Validators.required],
 
