@@ -22,6 +22,8 @@ udemy [Build an app with ASPNET Core and Angular from scratch](https://www.udemy
       > npm i @kolkov/ngx-gallery
   1. [ng2-file-upload](https://valor-software.com/ng2-file-upload/)
       > npm install ng2-file-upload --save
+  1. [ngx-time-ago](https://www.npmjs.com/package/ngx-timeago)
+      > npm i time-ago-pipe
   1. third party components
      1. alertify
      1. ngx boostrap
