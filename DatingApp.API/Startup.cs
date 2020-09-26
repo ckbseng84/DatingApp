@@ -57,6 +57,7 @@ namespace DatingApp.API
                         ValidateAudience=false
                 };
             });
+            services.AddScoped<LoginUserActivity>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -91,7 +92,7 @@ namespace DatingApp.API
             //otherwise, unable to authorize
             app.UseAuthentication();
             app.UseAuthorization();
-          
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
