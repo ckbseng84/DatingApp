@@ -94,5 +94,8 @@ udemy [Build an app with ASPNET Core and Angular from scratch](https://www.udemy
      > binary
   1. ServiceFilter
 
+### Entity Framework
+  1. defered execution
+
 
 

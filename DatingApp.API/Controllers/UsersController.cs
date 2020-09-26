@@ -26,10 +26,18 @@ namespace DatingApp.API.Controllers
             _mapper = mapper;
         }
 
+        // default => api/users
+        // specific in url => api/users?pagenumber=2 or api/users?pagesize=5 or api/users?pagenumber=2&pagesize=5
+        // return in header => {"currentPage":x,"itemsPerPage":x,"totalItems":x,"totalPages":x}
         [HttpGet]
-        public async Task<IActionResult> GetUsers(){
-            var users = await _repo.GetUsers();
+        public async Task<IActionResult> GetUsers([FromQuery]UserParams userParams){
+            
+            var users = await _repo.GetUsers(userParams);
             var mappedUsers = _mapper.Map<IEnumerable<UserForListDto>>(users);
+            
+            Response.AddPagination(users.CurrentPage, users.PageSize, 
+                                    users.TotalCount, users.TotalPages);
+            
             return Ok(mappedUsers);
         }
         [HttpGet("{id}",Name = "GetUser")]
