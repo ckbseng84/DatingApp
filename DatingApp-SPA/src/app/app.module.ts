@@ -31,7 +31,7 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { MemberEditResolver } from './_resolver/member-edit.resolver';
 import { PreventUnsavedChanged } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
-
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -64,6 +64,7 @@ export function tokenGetter() {
     FileUploadModule,
     TimeagoModule.forRoot(),
     PaginationModule.forRoot(),
+    ButtonsModule.forRoot(),
     JwtModule.forRoot({
       config: {
          tokenGetter,
