@@ -20,7 +20,7 @@ namespace DatingApp.API.Helpers
             var camelCaseFormatter = new JsonSerializerSettings();
             camelCaseFormatter.ContractResolver = new CamelCasePropertyNamesContractResolver(); // default is return title case
             response.Headers.Add("Pagination", JsonConvert.SerializeObject(paginationHeader,camelCaseFormatter));
-            response.Headers.Add("Access-Control-Expose-Headers", "Application-Error"); // todo why need to add this line of code?
+            response.Headers.Add("Access-Control-Expose-Headers", "Pagination"); // todo why need to add this line of code?
         }
 
         public static int CalculateAge(this DateTime theBirthDate)
