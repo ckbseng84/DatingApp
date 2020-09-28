@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatingApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200928174008_AddedLikeEntity")]
+    [Migration("20200928180354_AddedLikeEntity")]
     partial class AddedLikeEntity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,7 +30,7 @@ namespace DatingApp.API.Migrations
 
                     b.HasIndex("LikeeId");
 
-                    b.ToTable("Likers");
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("DatingApp.API.Models.Photo", b =>

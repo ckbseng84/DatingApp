@@ -12,7 +12,7 @@ namespace DatingApp.API.Data
         public DbSet<User> Users {get;set;}
         
         public DbSet<Photo> Photos { get; set; }
-        public DbSet<Like> Likers {get;set;}
+        public DbSet<Like> Likes {get;set;}
         protected override void OnModelCreating(ModelBuilder builer)
         {
             // introduce composite keys

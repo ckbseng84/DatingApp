@@ -7,7 +7,7 @@ namespace DatingApp.API.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Likers",
+                name: "Likes",
                 columns: table => new
                 {
                     LikerId = table.Column<int>(nullable: false),
@@ -15,15 +15,15 @@ namespace DatingApp.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Likers", x => new { x.LikerId, x.LikeeId });
+                    table.PrimaryKey("PK_Likes", x => new { x.LikerId, x.LikeeId });
                     table.ForeignKey(
-                        name: "FK_Likers_Users_LikeeId",
+                        name: "FK_Likes_Users_LikeeId",
                         column: x => x.LikeeId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Likers_Users_LikerId",
+                        name: "FK_Likes_Users_LikerId",
                         column: x => x.LikerId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -31,15 +31,15 @@ namespace DatingApp.API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Likers_LikeeId",
-                table: "Likers",
+                name: "IX_Likes_LikeeId",
+                table: "Likes",
                 column: "LikeeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Likers");
+                name: "Likes");
         }
     }
 }

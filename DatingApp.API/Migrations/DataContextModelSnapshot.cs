@@ -28,7 +28,7 @@ namespace DatingApp.API.Migrations
 
                     b.HasIndex("LikeeId");
 
-                    b.ToTable("Likers");
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("DatingApp.API.Models.Photo", b =>
