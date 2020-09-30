@@ -13,6 +13,7 @@ namespace DatingApp.API.Data
         
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Like> Likes {get;set;}
+        public DbSet<Message> Messages{get;set;}
         protected override void OnModelCreating(ModelBuilder builer)
         {
             // introduce composite keys
@@ -29,6 +30,17 @@ namespace DatingApp.API.Data
                 .HasOne(u => u.Liker)
                 .WithMany( u => u.Likees)
                 .HasForeignKey(u => u.LikerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // introduce foreign key
+            builer.Entity<Message>()
+                .HasOne(u => u.Sender)
+                .WithMany( u => u.MessageSent)
+                .OnDelete(DeleteBehavior.Restrict);
+            //introduce foreign key
+            builer.Entity<Message>()
+                .HasOne(u => u.Recipient)
+                .WithMany( u => u.MessageReceived)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
