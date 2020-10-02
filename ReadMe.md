@@ -93,6 +93,7 @@ udemy [Build an app with ASPNET Core and Angular from scratch](https://www.udemy
      > raw
      > binary
   1. ServiceFilter
+  1. AutoMapper => ReverseMap
 
 ### Entity Framework
   1. defered execution
