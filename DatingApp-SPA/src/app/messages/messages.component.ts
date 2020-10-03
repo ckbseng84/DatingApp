@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Message } from '../_models/Message';
+import { PaginatedResult, Pagination } from '../_models/Pagination';
+import { AlertifyService } from '../_services/alertify.service';
+import { AuthService } from '../_services/auth.service';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-messages',
@@ -6,10 +12,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./messages.component.scss']
 })
 export class MessagesComponent implements OnInit {
-
-  constructor() { }
+  message: Message[];
+  pagination: Pagination;
+  messageContainer: 'Unread';
+  constructor(private userService: UserService,
+              private authService: AuthService,
+              private route: ActivatedRoute,
+              private alertify: AlertifyService) { }
 
   ngOnInit() {
+    this.route.data.subscribe( data => {
+      this.message = data['messages'].result;
+      this.pagination = data['messages'].pagination;
+    });
+  }
+  loadMessages(){
+    this.userService.getMessage(this.authService.decodedToken.nameid,
+      this.pagination.currentPage, this.pagination.itemsPerPage,
+      this.messageContainer).subscribe((res: PaginatedResult<Message[]>) => {
+        this.message = res.result;
+        this.pagination = res.pagination;
+      }, error => {
+        this.alertify.error(error);
+      });
+  }
+
+  pageChanged(event: any): void{
+    this.pagination.currentPage = event.page;
+    this.loadMessages();
   }
 
 }
