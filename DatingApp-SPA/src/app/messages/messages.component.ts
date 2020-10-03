@@ -12,7 +12,7 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./messages.component.scss']
 })
 export class MessagesComponent implements OnInit {
-  message: Message[];
+  messages: Message[];
   pagination: Pagination;
   messageContainer: 'Unread';
   constructor(private userService: UserService,
@@ -22,7 +22,7 @@ export class MessagesComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe( data => {
-      this.message = data['messages'].result;
+      this.messages = data['messages'].result;
       this.pagination = data['messages'].pagination;
     });
   }
@@ -30,7 +30,7 @@ export class MessagesComponent implements OnInit {
     this.userService.getMessage(this.authService.decodedToken.nameid,
       this.pagination.currentPage, this.pagination.itemsPerPage,
       this.messageContainer).subscribe((res: PaginatedResult<Message[]>) => {
-        this.message = res.result;
+        this.messages = res.result;
         this.pagination = res.pagination;
       }, error => {
         this.alertify.error(error);
