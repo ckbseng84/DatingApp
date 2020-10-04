@@ -70,39 +70,22 @@ namespace DatingApp.API.Controllers
         {
             if (!IsAuthorizedUser(userId)) return Unauthorized();
 
-            messageforCreationDto.SenderId = userId;
-
+            var sender = await _repo.GetUser(userId);// Automapper - magic map
             var recipient = await _repo.GetUser(messageforCreationDto.RecipientId);
 
             if(recipient == null)
                 return BadRequest("Could not find user");
 
+            messageforCreationDto.SenderId = userId;
+
             var message = _mapper.Map<Message>(messageforCreationDto);
             
             _repo.Add(message);
 
-            
-
             if(await _repo.SaveAll())  
             {
-                var messageToReturnFromRepo = await _repo.GetMessageThread(userId, recipient.Id);
-                if (messageToReturnFromRepo != null){
-                    Message messageToReturn = null;
-                    foreach (var item in messageToReturnFromRepo)
-                    {
-                        if(item.Id == message.Id)
-                        {
-                            messageToReturn = item;
-                            break;
-                        }
-                    }
-                    if (messageToReturn != null)
-                    {
-                        var messageToReturnDto = _mapper.Map<MessageToReturnDto>(messageToReturn);
-                        return CreatedAtRoute("GetMessage",new {userId, id = message.Id}, messageToReturnDto);
-                    }
-                   
-                }
+                var messageToReturnDto = _mapper.Map<MessageToReturnDto>(message);
+                return CreatedAtRoute("GetMessage",new {userId, id = message.Id}, messageToReturnDto);
                 
             }
             throw new System.Exception("Create this message failed on save");   
