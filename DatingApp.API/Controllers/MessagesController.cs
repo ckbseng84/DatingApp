@@ -91,6 +91,29 @@ namespace DatingApp.API.Controllers
             throw new System.Exception("Create this message failed on save");   
 
         }
+
+        [HttpPost("{id}")]
+        public async Task<IActionResult> DeleteMessage(int id, int userId)
+        {
+            if (!IsAuthorizedUser(userId))return Unauthorized();
+
+            var messageFromRepo = await _repo.GetMessage(id);
+
+            if (messageFromRepo.SenderId == userId)
+                messageFromRepo.SenderDeleted = true;
+
+            if (messageFromRepo.RecipientId == userId)
+                messageFromRepo.RecipientDeleted = true;
+
+            if (messageFromRepo.SenderDeleted && messageFromRepo.RecipientDeleted)
+                _repo.Delete(messageFromRepo);
+            
+            if (await _repo.SaveAll())
+                return NoContent();
+            throw new System.Exception("Error deleting the message");
+
+        }
+
         private bool IsAuthorizedUser(int userId)
         {
             return (userId == int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value));
