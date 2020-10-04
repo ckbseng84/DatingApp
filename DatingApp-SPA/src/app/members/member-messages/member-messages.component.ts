@@ -22,7 +22,7 @@ export class MemberMessagesComponent implements OnInit {
     this.loadMessages();
   }
   loadMessages(){
-    this.userService.getMessageThread(this.authService.decodedToken.nameid,this.recipientId)
+    this.userService.getMessageThread(this.authService.decodedToken.nameid, this.recipientId)
       .subscribe(messages => {
         this.messages = messages;
       }, error => {
