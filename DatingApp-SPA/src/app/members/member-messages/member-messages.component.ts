@@ -1,5 +1,6 @@
 
 import { Component, Input, OnInit } from '@angular/core';
+import { error } from 'protractor';
 import { Message } from 'src/app/_models/Message';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -13,6 +14,7 @@ import { UserService } from 'src/app/_services/user.service';
 export class MemberMessagesComponent implements OnInit {
   @Input() recipientId: number; // get input from parent component
   messages: Message[];
+  newMessage: any = {};
 
   constructor(private userService: UserService,
               private authService: AuthService,
@@ -28,6 +30,15 @@ export class MemberMessagesComponent implements OnInit {
       }, error => {
         this.alertify.error(error);
       });
+  }
+  sendMessage(){
+    this.newMessage.recipientId = this.recipientId;
+    this.userService.sendmessage(this.authService.decodedToken.nameid, this.newMessage).subscribe((message: Message) => {
+      this.messages.unshift(message);
+      this.newMessage.content = '';
+    }, error => {
+      this.alertify.error(error);
+    });
   }
 
 }
