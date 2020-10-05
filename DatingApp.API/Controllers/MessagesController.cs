@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -111,6 +112,25 @@ namespace DatingApp.API.Controllers
             if (await _repo.SaveAll())
                 return NoContent();
             throw new System.Exception("Error deleting the message");
+
+        }
+        [HttpPost("{id}/read")]
+        public async Task<IActionResult> MarkMessageAsRead(int userId, int id)
+        {
+            if (!IsAuthorizedUser(userId))return Unauthorized();
+             var messageFromRepo = await _repo.GetMessage(id);
+
+            if (messageFromRepo.RecipientId != userId)
+            {
+                return Unauthorized();
+            }
+
+            messageFromRepo.IsRead=true;
+            messageFromRepo.DateRead = DateTime.Now;
+            
+            await _repo.SaveAll();
+            
+            return NoContent();
 
         }
 
