@@ -88,6 +88,12 @@ namespace DatingApp.API
             //must declare after UseRouting
             //for development purposes only, as it is weak secure
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            
+
+            // tell kestrel server to use wwwroot folder
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            
             //has to sequence authentication > authorization
             //otherwise, unable to authorize
             app.UseAuthentication();
@@ -96,6 +102,7 @@ namespace DatingApp.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index","Fallback");
             });
         }
     }
