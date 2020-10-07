@@ -33,15 +33,19 @@ namespace DatingApp.API
         public IConfiguration Configuration { get; }
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(x => 
-            x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>(x => {
+                x.UseLazyLoadingProxies();
+                x.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+            });
             ConfigureServices(services);
         }
 
          public void ConfigureProductionServices(IServiceCollection services)
         {
-             services.AddDbContext<DataContext>(x => 
-             x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>(x => {
+                x.UseLazyLoadingProxies();
+                x.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+            });
             ConfigureServices(services);
         }
 
