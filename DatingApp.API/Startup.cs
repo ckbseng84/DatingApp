@@ -97,7 +97,6 @@ namespace DatingApp.API
             );
             services.AddCors();
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings")); // get parameters from json by group
-            services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IDatingRepository, DatingRepository>();
             services.AddAutoMapper(typeof(DatingRepository).Assembly); // google automapper for multiple instance
             
