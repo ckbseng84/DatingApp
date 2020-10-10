@@ -57,6 +57,15 @@ udemy [Build an app with ASPNET Core and Angular from scratch](https://www.udemy
 ## Third Party tools
   1. [Cloudinary](https://cloudinary.com/) - cloud photos books
 
+## Publish
+### IIS
+  1. try on default iis port, it works but cannot convert to application
+  1. tried on creating new web site with different port. It works, no error
+  1. but tried on subfolder, it error, same as default iis web site
+  1. some of the recommend is use URL writer, tried but not really work like expected
+  > To be study
+### Linux
+  > to be study
 ## UI Design references
   1. [Bootstrap 4](https://getbootstrap.com/)
   1. [Bootswatch](https://bootswatch.com/)
@@ -95,10 +104,12 @@ udemy [Build an app with ASPNET Core and Angular from scratch](https://www.udemy
      > binary
   1. ServiceFilter
   1. AutoMapper => ReverseMap
+  1. Fallback controller
 
 ### Entity Framework
   1. defered execution
   1. Automapper - magic mapping
 
-
-
+## some bugs to be fixed
+### Angular - SPA
+  1. after login the sequence of the members list is not correct, several member will go next page while press next button, but aftet that the sequence is correct alrdy
