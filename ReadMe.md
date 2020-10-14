@@ -94,6 +94,9 @@ udemy [Build an app with ASPNET Core and Angular from scratch](https://www.udemy
   1. what is '!important'
   1. TabsetComponents
   1. Modals(ngx bootstrap)
+  1. EventEmitter
+  1. spread operator
+      > [....
 ### Bootstrap
 
 ### Web Api(Asp.net core)
