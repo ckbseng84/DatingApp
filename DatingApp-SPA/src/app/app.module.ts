@@ -12,6 +12,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimeagoModule } from 'ngx-timeago';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -40,6 +41,7 @@ import { HasRoleDirective } from './_directive/hasRole.directive';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { AdminService } from './_services/admin.service';
+import { RoleModalComponent } from './admin/role-modal/role-modal.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -62,6 +64,7 @@ export function tokenGetter() {
       HasRoleDirective,
       UserManagementComponent,
       PhotoManagementComponent,
+      RoleModalComponent,
    ],
   imports: [
     BrowserModule,
@@ -78,6 +81,7 @@ export function tokenGetter() {
     TimeagoModule.forRoot(),
     PaginationModule.forRoot(),
     ButtonsModule.forRoot(),
+    ModalModule.forRoot(),
     JwtModule.forRoot({
       config: {
          tokenGetter,
