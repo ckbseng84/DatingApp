@@ -31,7 +31,9 @@ namespace DatingApp.API.Data
                     //TODO no hardcode, create another object to store user from seed
                     //then call mapper to map and assign the password
                     userManager.CreateAsync(user,"password").Wait();
-                    userManager.AddToRoleAsync(user,"Member");
+                    userManager.AddToRoleAsync(user,"Member").Wait();
+                    //have to comment, otherwise got error
+                    //user.Photos.SingleOrDefault().IsApproved = true;
                 }
 
                 var adminUser = new User

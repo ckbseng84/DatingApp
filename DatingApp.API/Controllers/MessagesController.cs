@@ -70,8 +70,8 @@ namespace DatingApp.API.Controllers
         {
             if (!IsAuthorizedUser(userId)) return Unauthorized();
 
-            var sender = await _repo.GetUser(userId);// Automapper - magic map
-            var recipient = await _repo.GetUser(messageforCreationDto.RecipientId);
+            var sender = await _repo.GetUser(userId, true);// Automapper - magic map
+            var recipient = await _repo.GetUser(messageforCreationDto.RecipientId,false);
 
             if(recipient == null)
                 return BadRequest("Could not find user");

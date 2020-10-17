@@ -32,7 +32,7 @@ namespace DatingApp.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUsers([FromQuery]UserParams userParams){
             var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var userFromRepo = await _repo.GetUser(currentUserId);
+            var userFromRepo = await _repo.GetUser(currentUserId, true);
             
             userParams.UserId = currentUserId;
 
@@ -50,7 +50,8 @@ namespace DatingApp.API.Controllers
         }
         [HttpGet("{id}",Name = "GetUser")]
         public async Task<IActionResult> GetUser(int Id){
-            var user = await _repo.GetUser(Id);
+            var isCurrentUser = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value) == Id;
+            var user = await _repo.GetUser(Id, isCurrentUser);
             var mappedUser = _mapper.Map<UserForDetailDto>(user);
             return Ok(mappedUser);
         }
@@ -59,7 +60,7 @@ namespace DatingApp.API.Controllers
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)){
                 return Unauthorized();
             }
-            var userFromRepo = await _repo.GetUser(id);
+            var userFromRepo = await _repo.GetUser(id, true);
             if (userFromRepo == null)
                 throw new System.Exception($"user {id} not found!");
 
@@ -81,7 +82,7 @@ namespace DatingApp.API.Controllers
             if (like != null)
                 return BadRequest("you have like this user");
 
-            if (await _repo.GetUser(recipientId) == null)
+            if (await _repo.GetUser(recipientId, false) == null)
                 return NotFound();
 
             like = new Like {

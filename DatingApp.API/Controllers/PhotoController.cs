@@ -56,7 +56,7 @@ namespace DatingApp.API.Controllers
             {
                 return Unauthorized();
             }
-            var userFromRepo = await _repo.GetUser(userId);
+            var userFromRepo = await _repo.GetUser(userId,true);
             // form-data for files            
             var file = photoForCreationDto.File;
 
@@ -105,7 +105,7 @@ namespace DatingApp.API.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("user id not match with token");
 
-            var user = await _repo.GetUser(userId);
+            var user = await _repo.GetUser(userId,true);
 
             if (!user.Photos.Any(p => p.Id == id))
                 return Unauthorized("photo not found");
@@ -130,7 +130,7 @@ namespace DatingApp.API.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("user id not match with token");
 
-            var user = await _repo.GetUser(userId);
+            var user = await _repo.GetUser(userId,true);
 
             if (!user.Photos.Any(p => p.Id == id))
                 return Unauthorized("photo not found");
