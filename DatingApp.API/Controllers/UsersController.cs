@@ -8,6 +8,7 @@ using DatingApp.API.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using DatingApp.API.Models;
+using System.Linq;
 
 namespace DatingApp.API.Controllers
 {
@@ -50,8 +51,16 @@ namespace DatingApp.API.Controllers
         }
         [HttpGet("{id}",Name = "GetUser")]
         public async Task<IActionResult> GetUser(int Id){
+            
             var user = await _repo.GetUser(Id);
             var mappedUser = _mapper.Map<UserForDetailDto>(user);
+
+            if (Id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+              mappedUser.Photos = mappedUser.Photos.Where(x => x.IsApproved).ToList();
+              if (mappedUser.Photos.Count==0)
+                mappedUser.PhotoUrl = null;
+            }
             return Ok(mappedUser);
         }
         [HttpPut("{id}")]
